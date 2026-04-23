@@ -1,12 +1,26 @@
 <?php
 include 'Connexion.php';
 
-$sql = "SELECT * FROM produits";
+// Gestion de la recherche
+$recherche = "";
+if(isset($_GET['recherche'])){
+    $recherche = $_GET['recherche'];
+    $sql = "SELECT * FROM produits WHERE nom LIKE '%$recherche%'";
+} else {
+    $sql = "SELECT * FROM produits";
+}
 $result = $conn->query($sql);
 ?>
 
 <h2>Liste Produits</h2>
 <a href="ajouter.php">Ajouter</a>
+
+<!-- Barre de recherche -->
+<form method="GET" style="margin: 15px 0;">
+    <input type="text" name="recherche" placeholder="Rechercher par nom..." value="<?= $recherche ?>">
+    <button type="submit">Rechercher</button>
+    <a href="index.php">Reset</a>
+</form>
 
 <table border="1">
     <tr>
