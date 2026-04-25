@@ -13,8 +13,8 @@ $result = $conn->query($sql);
 ?>
 
 <h2>Liste Produits</h2>
-<a href="ajouter.php">Ajouter</a>
-
+<a href="ajouter.php">Ajouter Produit</a>
+<a href="categories.php">Gérer Catégories </a>
 <!-- Barre de recherche -->
 <form method="GET" style="margin: 15px 0;">
     <input type="text" name="recherche" placeholder="Rechercher par nom..." value="<?= $recherche ?>">
