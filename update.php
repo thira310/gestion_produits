@@ -2,10 +2,8 @@
 include 'Connexion.php';
 
 $id = $_GET['id'];
-
-// Récupérer toutes les catégories
-$sql_cat = "SELECT code, label FROM categories";
-$result_cat = $conn->query($sql_cat);
+$result = $conn->query("SELECT * FROM produits WHERE id=$id");
+$produit = $result->fetch_assoc();
 
 if(isset($_POST['modifier'])){
     $nom = $_POST['nom'];
@@ -21,7 +19,7 @@ if(isset($_POST['modifier'])){
             prix='$prix', 
             category='$category' 
             WHERE id=$id";
-    
+
     if($conn->query($sql) === TRUE){
         header("Location: index.php");
         exit();
@@ -29,33 +27,37 @@ if(isset($_POST['modifier'])){
         echo "Erreur: " . $conn->error;
     }
 }
-
-$sql = "SELECT * FROM produits WHERE id = $id";
-$result = $conn->query($sql);
-$row = $result->fetch_assoc();
 ?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Modifier Produit</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-<h2>Update de Produit</h2>
-<a href="index.php">Retour</a>
+<h2>Modifier le Produit</h2>
+<a href="index.php" class="btn-back">Retour</a>
 
 <form method="POST">
-    Nom: <input type="text" name="nom" value="<?= $row['nom'] ?>" required><br><br>
-    Description: <textarea name="description" required><?= $row['description'] ?></textarea><br><br>
-    Quantité: <input type="number" name="quantite" value="<?= $row['quantite'] ?>" required><br><br>
-    Prix: <input type="number" step="0.01" name="prix" value="<?= $row['prix'] ?>" required><br><br>
-    
-    Catégorie: 
+    Nom: <input type="text" name="nom" value="<?= $produit['nom'] ?>" required><br><br>
+    Description: <textarea name="description"><?= $produit['description'] ?></textarea><br><br>
+    Quantité: <input type="number" name="quantite" value="<?= $produit['quantite'] ?>" required><br><br>
+    Prix: <input type="number" step="0.01" name="prix" value="<?= $produit['prix'] ?>" required><br><br>
+    Catégorie:
     <select name="category" required>
         <?php 
-        // On relance la requête car le while a déjà consommé $result_cat
-        $result_cat = $conn->query($sql_cat);
-        while($cat = $result_cat->fetch_assoc()): 
+        $cat = $conn->query("SELECT * FROM categories");
+        while($c = $cat->fetch_assoc()){ 
+            $selected = $c['code'] == $produit['category'] ? 'selected' : '';
+            echo "<option value='{$c['code']}' $selected>{$c['label']}</option>";
+        }
         ?>
-            <option value="<?= $cat['code'] ?>" <?= ($cat['code'] == $row['category']) ? 'selected' : '' ?>>
-                <?= $cat['label'] ?>
-            </option>
-        <?php endwhile; ?>
     </select><br><br>
     
-    <button type="submit" name="modifier">Modifier</button>
+    <button type="submit" name="modifier" class="btn-update">Modifier</button>
 </form>
+
+</body>
+</html>

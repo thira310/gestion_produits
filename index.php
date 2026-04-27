@@ -11,12 +11,21 @@ if(isset($_GET['recherche'])){
 }
 $result = $conn->query($sql);
 ?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Gestion Produits</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
 <h2>Liste Produits</h2>
 <a href="ajouter.php">Ajouter Produit</a>
-<a href="categories.php">Gérer Catégories </a>
+<a href="categories.php">Gérer Catégories</a>
+
 <!-- Barre de recherche -->
-<form method="GET" style="margin: 15px 0;">
+<form method="GET">
     <input type="text" name="recherche" placeholder="Rechercher par nom..." value="<?= $recherche ?>">
     <button type="submit">Rechercher</button>
     <a href="index.php">Reset</a>
@@ -24,9 +33,9 @@ $result = $conn->query($sql);
 
 <table border="1">
     <tr>
-        <th>ID</th><th>Nom</th><th>Descript</th><th>Quantité</th><th>Prix</th><th>Catégorie</th><th>Action</th>
+        <th>ID</th><th>Nom</th><th>Description</th><th>Quantité</th><th>Prix</th><th>Catégorie</th><th>Action</th>
     </tr>
-    <?php while($row = $result->fetch_assoc()): ?>
+    <?php while($row = $result->fetch_assoc()) { ?>
     <tr>
         <td><?= $row['id'] ?></td>
         <td><?= $row['nom'] ?></td>
@@ -40,5 +49,8 @@ $result = $conn->query($sql);
             <a href="delete.php?id=<?= $row['id'] ?>">Delete</a>
         </td>
     </tr>
-    <?php endwhile; ?>
+    <?php } ?>
 </table>
+
+</body>
+</html>
