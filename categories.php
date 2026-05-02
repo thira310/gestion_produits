@@ -49,8 +49,9 @@ $result = $conn->query("SELECT * FROM categories");
         <td><?= $row['code'] ?></td>
         <td><?= $row['label'] ?></td>
         <td>
-            <a href="categories.php?delete_cat=<?= $row['code'] ?>" class="btn-delete" onclick="return confirm('Supprimer cette catégorie ?')">Delete</a>
-        </td>
+    <a href="update_categorie.php?id=<?= $row['id'] ?>" class="btn-action btn-update">Update</a>
+    <a href="delete_categorie.php?id=<?= $row['id'] ?>" class="btn-action btn-delete">Delete</a>
+</td>
     </tr>
     <?php } ?>
 </table>

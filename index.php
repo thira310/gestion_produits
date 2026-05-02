@@ -46,7 +46,7 @@ $result = $conn->query($sql);
         <td>
     <a href="details.php?id=<?= $row['id'] ?>" class="btn-action btn-details">Details</a>
     <a href="update.php?id=<?= $row['id'] ?>" class="btn-action btn-update">Update</a>
-    <a href="supprimer.php?id=<?= $row['id'] ?>" class="btn-action btn-delete">Delete</a>
+    <a href="delete.php?id=<?= $row['id'] ?>" class="btn-action btn-delete">Delete</a>
 </td>
     </tr>
     <?php } ?>
