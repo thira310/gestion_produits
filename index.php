@@ -44,10 +44,10 @@ $result = $conn->query($sql);
         <td><?= $row['prix'] ?></td>
         <td><?= $row['category'] ?></td>
         <td>
-            <a href="details.php?id=<?= $row['id'] ?>">Détails</a>
-            <a href="update.php?id=<?= $row['id'] ?>">Update</a>
-            <a href="delete.php?id=<?= $row['id'] ?>">Delete</a>
-        </td>
+    <a href="details.php?id=<?= $row['id'] ?>" class="btn-action btn-details">Details</a>
+    <a href="update.php?id=<?= $row['id'] ?>" class="btn-action btn-update">Update</a>
+    <a href="supprimer.php?id=<?= $row['id'] ?>" class="btn-action btn-delete">Delete</a>
+</td>
     </tr>
     <?php } ?>
 </table>
