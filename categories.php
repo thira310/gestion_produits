@@ -18,7 +18,7 @@ if(isset($_GET['delete_cat'])){
     exit();
 }
 
-$result = $conn->query("SELECT * FROM categories");
+$result = $conn->query("SELECT * FROM categories ORDER BY id DESC");
 ?>
 <!DOCTYPE html>
 <html>

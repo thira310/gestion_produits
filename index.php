@@ -7,7 +7,7 @@ if(isset($_GET['recherche'])){
     $recherche = $_GET['recherche'];
     $sql = "SELECT * FROM produits WHERE nom LIKE '%$recherche%'";
 } else {
-    $sql = "SELECT * FROM produits";
+    $sql = "SELECT * FROM produits ORDER BY id DESC";
 }
 $result = $conn->query($sql);
 ?>
