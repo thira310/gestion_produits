@@ -7,7 +7,11 @@ if(isset($_GET['recherche'])){
     $recherche = $_GET['recherche'];
     $sql = "SELECT * FROM produits WHERE nom LIKE '%$recherche%'";
 } else {
-    $sql = "SELECT * FROM produits ORDER BY id DESC";
+    $sql = " SELECT p.id, p.nom, p.description, p.quantite, p.prix, c.label 
+            FROM produits p 
+            LEFT JOIN categories c ON 
+            p.category =c.code
+                ORDER BY p.id DESC";
 }
 $result = $conn->query($sql);
 ?>
@@ -42,7 +46,7 @@ $result = $conn->query($sql);
         <td><?= $row['description'] ?></td>
         <td><?= $row['quantite'] ?></td>
         <td><?= $row['prix'] ?></td>
-        <td><?= $row['category'] ?></td>
+        <td><?= $row['label'] ?></td>
         <td>
     <a href="details.php?id=<?= $row['id'] ?>" class="btn-action btn-details">Details</a>
     <a href="update.php?id=<?= $row['id'] ?>" class="btn-action btn-update">Update</a>
